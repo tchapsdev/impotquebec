@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/lib/fontawesome-free-6.0.0-web/css/all.css" />
     <link rel="stylesheet" href="~/impotquebec.Web.styles.css" asp-append-version="true" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/jquery.steps@1.1.2/dist/jquery-steps.min.css">
 </head>
 <body>
     <header>
@@ -22,6 +23,12 @@
                     <ul class="navbar-nav flex-grow-1">
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
+                        </li>
+                        <li class="nav-item">
+                            @if (User.Identity.IsAuthenticated)
+                            {
+                                  <a class="nav-link text-dark" asp-area="" asp-controller="Declarations" asp-action="Index">Declarations</a>
+                            }                          
                         </li>
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
@@ -44,10 +51,13 @@
         </div>
     </footer>
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
-    <script src="~/lib/jquery.steps-1.1.0/jquery.steps.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/lib/fontawesome-free-6.0.0-web/js/all.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
+    <script src="~/js/app/http_service.js" asp-append-version="true"></script>
+    <script src="~/js/app/tax_service.js" asp-append-version="true"></script>
+    <script src="https://cdn.jsdelivr.net/npm/jquery.steps@1.1.2/dist/jquery-steps.min.js"></script>
     @await RenderSectionAsync("Scripts", required: false)
+
 </body>
 </html>

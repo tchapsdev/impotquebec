@@ -7,6 +7,7 @@ namespace impotquebec.Web.Models
     {
         public int IdentityProfileId { get; set; }
         public string UserId { get; set; }
+        [System.Text.Json.Serialization.JsonIgnore]
         public virtual IdentityUser? User { get; set; }
 
         public string FirstName { get; set; }

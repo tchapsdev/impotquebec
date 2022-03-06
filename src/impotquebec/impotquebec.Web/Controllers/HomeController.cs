@@ -1,5 +1,8 @@
-﻿using impotquebec.Web.Models;
+﻿using impotquebec.Web.Data;
+using impotquebec.Web.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using System.Diagnostics;
 
 namespace impotquebec.Web.Controllers
@@ -7,21 +10,19 @@ namespace impotquebec.Web.Controllers
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
+        private readonly ApplicationDbContext _context;
 
-        public HomeController(ILogger<HomeController> logger)
+        public HomeController(ILogger<HomeController> logger, ApplicationDbContext context)
         {
             _logger = logger;
+            _context = context;
         }
 
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
-            return View();
+            return View(await _context.TaxForms.ToListAsync());
         }
 
-        public IActionResult IncomeTax(string id)
-        {
-            return View();
-        }
 
         public IActionResult Privacy()
         {

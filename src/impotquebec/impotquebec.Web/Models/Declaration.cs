@@ -26,9 +26,11 @@ namespace impotquebec.Web.Models
 
 
         public int TaxFormId { get; set; }
+        [System.Text.Json.Serialization.JsonIgnore]
         public TaxForm? TaxForm { get; set; }
 
         public string UserId { get; set; }
+        [System.Text.Json.Serialization.JsonIgnore]
         public IdentityUser? User { get; set; }
 
 

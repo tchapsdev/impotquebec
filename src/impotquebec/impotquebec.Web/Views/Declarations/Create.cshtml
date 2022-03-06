@@ -1,0 +1,67 @@
+﻿@model impotquebec.Web.Models.Declaration
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h1>Create</h1>
+
+<h4>Declaration</h4>
+<hr />
+
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create">
+                <input asp-for="UserId" class="form-control" type="hidden"/>
+                <input asp-for="TaxFormId" class="form-control" type="hidden"/>
+
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="FiscalYear" class="control-label"></label>
+                <input asp-for="FiscalYear" class="form-control" maxlength='4' min='2020'/>
+                <span asp-validation-for="FiscalYear" class="text-danger"></span>
+            </div>
+           
+        </form>
+    </div>
+</div>
+<br />
+<div class='row'>    
+    <div class="step-app" id="demo">
+      <ul class="step-steps">
+        <li data-step-target="step1">Step 1</li>
+        <li data-step-target="step2">Step 2</li>
+        <li data-step-target="step3">Step 3</li>
+      </ul>
+      <div class="step-content">
+        <div class="step-tab-panel" data-step="step1">
+          ...
+        </div>
+        <div class="step-tab-panel" data-step="step2">
+          ...
+        </div>
+        <div class="step-tab-panel" data-step="step3">
+          ...
+        </div>
+      </div>
+      <div class="step-footer">
+        <button data-step-action="prev" class="step-btn">Previous</button>
+        <button data-step-action="next" class="step-btn">Next</button>
+        <button data-step-action="finish" class="step-btn">Finish</button>
+      </div>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+
+    <script>
+    $(document).ready(function(){
+       tax_service.init_declaration();
+    })
+    </script>
+}

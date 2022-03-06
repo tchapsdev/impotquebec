@@ -1,0 +1,105 @@
+﻿@model impotquebec.Web.Models.Declaration
+
+@{
+    ViewData["Title"] = "Delete";
+}
+
+<h1>Delete</h1>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>Declaration</h4>
+    <hr />
+    <dl class="row">
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.FiscalYear)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.FiscalYear)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.TotalIncome)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.TotalIncome)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.TotalDeductions)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.TotalDeductions)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.NetIncome)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.NetIncome)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.TaxableIncome)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.TaxableIncome)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.NonRefundableTaxCredits)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.NonRefundableTaxCredits)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.IncomeTaxAndContributions)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.IncomeTaxAndContributions)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Refund)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Refund)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.BalanceDue)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.BalanceDue)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.TaxForm)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.TaxForm.TaxFormId)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.User)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.User.Id)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.History)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.History)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Created)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Created)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Modified)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Modified)
+        </dd>
+    </dl>
+    
+    <form asp-action="Delete">
+        <input type="hidden" asp-for="DeclarationId" />
+        <input type="submit" value="Delete" class="btn btn-danger" /> |
+        <a asp-action="Index">Back to List</a>
+    </form>
+</div>
