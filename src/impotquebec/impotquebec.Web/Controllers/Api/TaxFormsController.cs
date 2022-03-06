@@ -38,7 +38,10 @@ namespace impotquebec.Web.Controllers.Api
             {
                 return NotFound();
             }
-            taxForm.TaxFormSections = await _context.TaxFormSections.Include(s => s.TaxFormLines).Where(s => s.TaxFormId == id).ToListAsync();
+            taxForm.TaxFormSections = await _context.TaxFormSections.Include(s => s.TaxFormLines)
+                .Where(s => s.TaxFormId == id)
+                .OrderBy(s=>s.Rank)
+                .ToListAsync();
             return Ok(taxForm);
         }
 

@@ -28,21 +28,11 @@
 <br />
 <div class='row'>    
     <div class="step-app" id="demo">
-      <ul class="step-steps">
-        <li data-step-target="step1">Step 1</li>
-        <li data-step-target="step2">Step 2</li>
-        <li data-step-target="step3">Step 3</li>
+      <ul class="step-steps" id='step_steps_block'>        
+        
       </ul>
-      <div class="step-content">
-        <div class="step-tab-panel" data-step="step1">
-          ...
-        </div>
-        <div class="step-tab-panel" data-step="step2">
-          ...
-        </div>
-        <div class="step-tab-panel" data-step="step3">
-          ...
-        </div>
+      <div class="step-content" id='step_content_block'>
+        
       </div>
       <div class="step-footer">
         <button data-step-action="prev" class="step-btn">Previous</button>
@@ -56,12 +46,21 @@
     <a asp-action="Index">Back to List</a>
 </div>
 
+@await Html.PartialAsync("_FormTemplate")
+
+
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
 
     <script>
     $(document).ready(function(){
        tax_service.init_declaration();
+
+        $('#demo').steps({
+      onFinish: function () {
+        alert('Wizard Completed');
+      }
+    });
     })
     </script>
 }

@@ -1,0 +1,55 @@
+﻿@{
+    Layout = null;
+}
+
+<script id="section-item-template" type="text/x-handlebars-template">
+   
+    {{#data.taxFormSections}}
+    <div class="step-tab-panel" data-step="step{{rank}}" id="step{{taxFormSectionId}}" data-taxFormSectionId="{{taxFormSectionId}}">
+          <h2>{{{name}}}</h2>
+          <table class='table table-sm table-striped table-responsive'>
+               {{#taxFormLines}}
+                <tr data-taxFormLineId="{{taxFormLineId}}" id="tax_form_line_{{taxFormLineId}}">
+                    <td>
+                         <label for="l_{{lineNumber}}" class="col-9 col-form-label">
+                           {{name}}
+                        </label>
+                    </td>
+                    <td>
+                        <input type="text" class="form-control" name="l_{{lineNumber}}" id="id_{{taxFormLineId}}"
+                                   {{#data.isRequired}}
+                                   required
+                                   {{/data.isRequired}}
+                                   validationMessage="{{name}} is required">
+                            <span class="k-invalid-msg" data-for="l_{{lineNumber}}"></span>
+                    </td>                  
+                </tr>
+                {{/taxFormLines}}
+          </table>
+    </div>
+    {{/data.taxFormSections}}
+</script>
+
+
+<script id="input-item-template" type="text/x-handlebars-template">
+    <div class="form-row" id="request_change_{{data.id}}" data-targtId="target_id_{{data.id}}">
+        <div class="form-group row col-sm-12">
+            <label for="{{data.name}}" class="col-2 col-form-label">
+                <strong>{{data.name}}</strong>
+            </label>
+            <div class="col">
+                <label for="txt{{data.taxFormLineId}}" data-id="{{data.taxFormLineId}}">
+                    {{{data.name}}}
+                    <i class="k-icon k-i-pencil"></i>
+                </label>
+                <input type="text" class="form-control" name="l_{{data.lineNumber}}" id="id_{{data.taxFormLineId}}"
+                       {{#data.isRequired}}
+                       required
+                       {{/data.isRequired}}
+                       validationMessage="{{data.name}} is required">
+                <span class="k-invalid-msg" data-for="l_{{data.lineNumber}}"></span>
+            </div>           
+        </div>
+    </div>
+</script>
+
