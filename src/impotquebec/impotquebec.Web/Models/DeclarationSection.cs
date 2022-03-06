@@ -1,7 +1,11 @@
 ﻿namespace impotquebec.Web.Models
 {
-    public class DeclarationSection: NamedEntity
+    public class TaxFormSection: NamedEntity
     {
-        public int DeclarationSectionId { get; set; }
+        public int TaxFormSectionId { get; set; }
+        public int TaxFormId { get; set; }
+        public virtual TaxForm? TaxForm { get; set; }
+        public string InternalName { get; set; }
+        public string LineNumbers { get; set; }// [12,,563, ]
     }
 }
