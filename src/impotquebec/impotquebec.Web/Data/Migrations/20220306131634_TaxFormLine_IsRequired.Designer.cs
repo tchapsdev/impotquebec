@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using impotquebec.Web.Data;
 
@@ -11,9 +12,10 @@ using impotquebec.Web.Data;
 namespace impotquebec.Web.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20220306131634_TaxFormLine_IsRequired")]
+    partial class TaxFormLine_IsRequired
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -106,23 +108,6 @@ namespace impotquebec.Web.Data.Migrations
                     b.HasIndex("DeclarationId");
 
                     b.ToTable("DeclarationDetails");
-                });
-
-            modelBuilder.Entity("impotquebec.Web.Models.FormDataType", b =>
-                {
-                    b.Property<int>("FormDataTypeId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("FormDataTypeId"), 1L, 1);
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("FormDataTypeId");
-
-                    b.ToTable("FormDataTypes");
                 });
 
             modelBuilder.Entity("impotquebec.Web.Models.IdentityProfile", b =>
@@ -234,9 +219,6 @@ namespace impotquebec.Web.Data.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("FormDataTypeId")
-                        .HasColumnType("int");
-
                     b.Property<bool>("IsActive")
                         .HasColumnType("bit");
 
@@ -245,9 +227,6 @@ namespace impotquebec.Web.Data.Migrations
 
                     b.Property<bool>("IsRequired")
                         .HasColumnType("bit");
-
-                    b.Property<string>("ItemLists")
-                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("LineNumber")
                         .IsRequired()
@@ -267,8 +246,6 @@ namespace impotquebec.Web.Data.Migrations
                         .HasColumnType("int");
 
                     b.HasKey("TaxFormLineId");
-
-                    b.HasIndex("FormDataTypeId");
 
                     b.HasIndex("TaxFormId");
 
@@ -301,9 +278,6 @@ namespace impotquebec.Web.Data.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("Rank")
-                        .HasColumnType("int");
-
                     b.Property<int>("TaxFormId")
                         .HasColumnType("int");
 
@@ -321,7 +295,6 @@ namespace impotquebec.Web.Data.Migrations
                             InternalName = "TotalIncome",
                             LineNumbers = "[101,105-164]",
                             Name = "Total income",
-                            Rank = 0,
                             TaxFormId = 1
                         },
                         new
@@ -331,7 +304,6 @@ namespace impotquebec.Web.Data.Migrations
                             InternalName = "TotalDeductions",
                             LineNumbers = "[201-207,214-231,234-252]",
                             Name = "Net income",
-                            Rank = 0,
                             TaxFormId = 1
                         },
                         new
@@ -341,7 +313,6 @@ namespace impotquebec.Web.Data.Migrations
                             InternalName = "TotalDeductions",
                             LineNumbers = "[287-297]",
                             Name = "Taxable income",
-                            Rank = 0,
                             TaxFormId = 1
                         },
                         new
@@ -351,7 +322,6 @@ namespace impotquebec.Web.Data.Migrations
                             InternalName = "TotalIncome",
                             LineNumbers = "",
                             Name = "Non-refundable tax credits",
-                            Rank = 0,
                             TaxFormId = 1
                         },
                         new
@@ -361,7 +331,6 @@ namespace impotquebec.Web.Data.Migrations
                             InternalName = "IncomeTaxAndContributions",
                             LineNumbers = "",
                             Name = "Income tax and contributions",
-                            Rank = 0,
                             TaxFormId = 1
                         },
                         new
@@ -371,7 +340,6 @@ namespace impotquebec.Web.Data.Migrations
                             InternalName = "RefundOrBalanceDue",
                             LineNumbers = "",
                             Name = "Refund or balance due",
-                            Rank = 0,
                             TaxFormId = 1
                         });
                 });
@@ -619,10 +587,6 @@ namespace impotquebec.Web.Data.Migrations
 
             modelBuilder.Entity("impotquebec.Web.Models.TaxFormLine", b =>
                 {
-                    b.HasOne("impotquebec.Web.Models.FormDataType", "FormDataType")
-                        .WithMany()
-                        .HasForeignKey("FormDataTypeId");
-
                     b.HasOne("impotquebec.Web.Models.TaxForm", "TaxForm")
                         .WithMany("TaxFormLines")
                         .HasForeignKey("TaxFormId")
@@ -632,8 +596,6 @@ namespace impotquebec.Web.Data.Migrations
                     b.HasOne("impotquebec.Web.Models.TaxFormSection", "TaxFormSection")
                         .WithMany()
                         .HasForeignKey("TaxFormSectionId");
-
-                    b.Navigation("FormDataType");
 
                     b.Navigation("TaxForm");
 

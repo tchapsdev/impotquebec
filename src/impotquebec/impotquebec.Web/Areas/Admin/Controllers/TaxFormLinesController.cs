@@ -24,7 +24,10 @@ namespace impotquebec.Web.Areas.Admin.Controllers
         // GET: Admin/TaxFormLines
         public async Task<IActionResult> Index()
         {
-            var applicationDbContext = _context.TaxFormLines.Include(t => t.TaxForm).Include(t => t.TaxFormSection);
+            var applicationDbContext = _context.TaxFormLines
+                .Include(t => t.TaxForm)
+                .Include(t => t.FormDataType)
+                .Include(t => t.TaxFormSection);
             return View(await applicationDbContext.OrderByDescending(l => l.TaxFormLineId).ToListAsync());
         }
 
@@ -39,6 +42,7 @@ namespace impotquebec.Web.Areas.Admin.Controllers
             var taxFormLine = await _context.TaxFormLines
                 .Include(t => t.TaxForm)
                 .Include(t => t.TaxFormSection)
+                .Include(t => t.FormDataType)
                 .FirstOrDefaultAsync(m => m.TaxFormLineId == id);
             if (taxFormLine == null)
             {
@@ -53,7 +57,14 @@ namespace impotquebec.Web.Areas.Admin.Controllers
         {
             ViewData["TaxFormId"] = new SelectList(_context.TaxForms, "TaxFormId", "Name");
             ViewData["TaxFormSectionId"] = new SelectList(_context.TaxFormSections, "TaxFormSectionId", "Name");
-            return View(new TaxFormLine { TaxFormId=1, TaxFormSectionId=6, Description="."});
+            ViewData["FormDataTypeId"] = new SelectList(_context.FormDataTypes, "FormDataTypeId", "Name");
+            return View(new TaxFormLine
+            {
+                TaxFormId = 1,
+                TaxFormSectionId = 8,
+                Description = ".",
+                IsRequired = true
+            });
         }
 
         // POST: Admin/TaxFormLines/Create
@@ -61,7 +72,7 @@ namespace impotquebec.Web.Areas.Admin.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("TaxFormLineId,TaxFormId,LineNumber,Rank,IsActive,IsReadOnly,TaxFormSectionId,Name,Description")] TaxFormLine taxFormLine)
+        public async Task<IActionResult> Create([Bind("TaxFormLineId,TaxFormId,LineNumber,Rank,IsActive,IsReadOnly,IsRequired,TaxFormSectionId,FormDataTypeId,Name,Description,ItemLists")] TaxFormLine taxFormLine)
         {
             if (ModelState.IsValid)
             {
@@ -71,6 +82,7 @@ namespace impotquebec.Web.Areas.Admin.Controllers
             }
             ViewData["TaxFormId"] = new SelectList(_context.TaxForms, "TaxFormId", "Name", taxFormLine.TaxFormId);
             ViewData["TaxFormSectionId"] = new SelectList(_context.TaxFormSections, "TaxFormSectionId", "Name", taxFormLine.TaxFormSectionId);
+            ViewData["FormDataTypeId"] = new SelectList(_context.FormDataTypes, "FormDataTypeId", "Name", taxFormLine.FormDataTypeId);
             return View(taxFormLine);
         }
 
@@ -89,6 +101,7 @@ namespace impotquebec.Web.Areas.Admin.Controllers
             }
             ViewData["TaxFormId"] = new SelectList(_context.TaxForms, "TaxFormId", "Name", taxFormLine.TaxFormId);
             ViewData["TaxFormSectionId"] = new SelectList(_context.TaxFormSections, "TaxFormSectionId", "Name", taxFormLine.TaxFormSectionId);
+            ViewData["FormDataTypeId"] = new SelectList(_context.FormDataTypes, "FormDataTypeId", "Name", taxFormLine.FormDataTypeId);
             return View(taxFormLine);
         }
 
@@ -97,7 +110,7 @@ namespace impotquebec.Web.Areas.Admin.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("TaxFormLineId,TaxFormId,LineNumber,Rank,IsActive,IsReadOnly,TaxFormSectionId,Name,Description")] TaxFormLine taxFormLine)
+        public async Task<IActionResult> Edit(int id, [Bind("TaxFormLineId,TaxFormId,LineNumber,Rank,IsActive,IsReadOnly,IsRequired,TaxFormSectionId,FormDataTypeId,Name,Description,ItemLists")] TaxFormLine taxFormLine)
         {
             if (id != taxFormLine.TaxFormLineId)
             {
@@ -126,6 +139,7 @@ namespace impotquebec.Web.Areas.Admin.Controllers
             }
             ViewData["TaxFormId"] = new SelectList(_context.TaxForms, "TaxFormId", "Name", taxFormLine.TaxFormId);
             ViewData["TaxFormSectionId"] = new SelectList(_context.TaxFormSections, "TaxFormSectionId", "Name", taxFormLine.TaxFormSectionId);
+            ViewData["FormDataTypeId"] = new SelectList(_context.FormDataTypes, "FormDataTypeId", "Name", taxFormLine.FormDataTypeId);
             return View(taxFormLine);
         }
 
@@ -140,6 +154,7 @@ namespace impotquebec.Web.Areas.Admin.Controllers
             var taxFormLine = await _context.TaxFormLines
                 .Include(t => t.TaxForm)
                 .Include(t => t.TaxFormSection)
+                .Include(t => t.FormDataType)
                 .FirstOrDefaultAsync(m => m.TaxFormLineId == id);
             if (taxFormLine == null)
             {

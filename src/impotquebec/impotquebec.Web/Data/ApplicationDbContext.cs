@@ -24,6 +24,7 @@ namespace impotquebec.Web.Data
         public DbSet<IdentityProfile> IdentityProfiles { get; set; }
         public DbSet<TaxForm> TaxForms { get; set; }
         public DbSet<TaxFormLine> TaxFormLines { get; set; }
+        public DbSet<FormDataType> FormDataTypes { get; set; }
 
     }
 }

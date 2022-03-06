@@ -18,6 +18,11 @@ namespace impotquebec.Web.Controllers
             return View();
         }
 
+        public IActionResult IncomeTax(string id)
+        {
+            return View();
+        }
+
         public IActionResult Privacy()
         {
             return View();

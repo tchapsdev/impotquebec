@@ -10,7 +10,13 @@
         public short Rank { get; set; }
         public bool IsActive { get; set; } = true;
         public bool IsReadOnly { get; set; }
+        public bool IsRequired { get; set; }
         public int? TaxFormSectionId { get; set; }
         public virtual TaxFormSection? TaxFormSection { get; set; }
+
+        public int? FormDataTypeId { get; set; }
+        public virtual FormDataType? FormDataType { get; set; }
+
+        public string? ItemLists { get; set; }
     }
 }

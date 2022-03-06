@@ -12,23 +12,22 @@ using impotquebec.Web.Models;
 namespace impotquebec.Web.Areas.Admin.Controllers
 {
     [Area("Admin")]
-    public class TaxFormSectionsController : Controller
+    public class FormDataTypesController : Controller
     {
         private readonly ApplicationDbContext _context;
 
-        public TaxFormSectionsController(ApplicationDbContext context)
+        public FormDataTypesController(ApplicationDbContext context)
         {
             _context = context;
         }
 
-        // GET: Admin/TaxFormSections
+        // GET: Admin/FormDataTypes
         public async Task<IActionResult> Index()
         {
-            var applicationDbContext = _context.TaxFormSections.Include(t => t.TaxForm);
-            return View(await applicationDbContext.ToListAsync());
+            return View(await _context.FormDataTypes.ToListAsync());
         }
 
-        // GET: Admin/TaxFormSections/Details/5
+        // GET: Admin/FormDataTypes/Details/5
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -36,42 +35,39 @@ namespace impotquebec.Web.Areas.Admin.Controllers
                 return NotFound();
             }
 
-            var taxFormSection = await _context.TaxFormSections
-                .Include(t => t.TaxForm)
-                .FirstOrDefaultAsync(m => m.TaxFormSectionId == id);
-            if (taxFormSection == null)
+            var formDataType = await _context.FormDataTypes
+                .FirstOrDefaultAsync(m => m.FormDataTypeId == id);
+            if (formDataType == null)
             {
                 return NotFound();
             }
 
-            return View(taxFormSection);
+            return View(formDataType);
         }
 
-        // GET: Admin/TaxFormSections/Create
+        // GET: Admin/FormDataTypes/Create
         public IActionResult Create()
         {
-            ViewData["TaxFormId"] = new SelectList(_context.TaxForms, "TaxFormId", "Name");
             return View();
         }
 
-        // POST: Admin/TaxFormSections/Create
+        // POST: Admin/FormDataTypes/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("TaxFormSectionId,TaxFormId,InternalName,LineNumbers,Name,Description,Rank")] TaxFormSection taxFormSection)
+        public async Task<IActionResult> Create([Bind("FormDataTypeId,Name")] FormDataType formDataType)
         {
             if (ModelState.IsValid)
             {
-                _context.Add(taxFormSection);
+                _context.Add(formDataType);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["TaxFormId"] = new SelectList(_context.TaxForms, "TaxFormId", "Name", taxFormSection.TaxFormId);
-            return View(taxFormSection);
+            return View(formDataType);
         }
 
-        // GET: Admin/TaxFormSections/Edit/5
+        // GET: Admin/FormDataTypes/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -79,23 +75,22 @@ namespace impotquebec.Web.Areas.Admin.Controllers
                 return NotFound();
             }
 
-            var taxFormSection = await _context.TaxFormSections.FindAsync(id);
-            if (taxFormSection == null)
+            var formDataType = await _context.FormDataTypes.FindAsync(id);
+            if (formDataType == null)
             {
                 return NotFound();
             }
-            ViewData["TaxFormId"] = new SelectList(_context.TaxForms, "TaxFormId", "Name", taxFormSection.TaxFormId);
-            return View(taxFormSection);
+            return View(formDataType);
         }
 
-        // POST: Admin/TaxFormSections/Edit/5
+        // POST: Admin/FormDataTypes/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("TaxFormSectionId,TaxFormId,InternalName,LineNumbers,Name,Description,Rank")] TaxFormSection taxFormSection)
+        public async Task<IActionResult> Edit(int id, [Bind("FormDataTypeId,Name")] FormDataType formDataType)
         {
-            if (id != taxFormSection.TaxFormSectionId)
+            if (id != formDataType.FormDataTypeId)
             {
                 return NotFound();
             }
@@ -104,12 +99,12 @@ namespace impotquebec.Web.Areas.Admin.Controllers
             {
                 try
                 {
-                    _context.Update(taxFormSection);
+                    _context.Update(formDataType);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!TaxFormSectionExists(taxFormSection.TaxFormSectionId))
+                    if (!FormDataTypeExists(formDataType.FormDataTypeId))
                     {
                         return NotFound();
                     }
@@ -120,11 +115,10 @@ namespace impotquebec.Web.Areas.Admin.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["TaxFormId"] = new SelectList(_context.TaxForms, "TaxFormId", "Name", taxFormSection.TaxFormId);
-            return View(taxFormSection);
+            return View(formDataType);
         }
 
-        // GET: Admin/TaxFormSections/Delete/5
+        // GET: Admin/FormDataTypes/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -132,31 +126,30 @@ namespace impotquebec.Web.Areas.Admin.Controllers
                 return NotFound();
             }
 
-            var taxFormSection = await _context.TaxFormSections
-                .Include(t => t.TaxForm)
-                .FirstOrDefaultAsync(m => m.TaxFormSectionId == id);
-            if (taxFormSection == null)
+            var formDataType = await _context.FormDataTypes
+                .FirstOrDefaultAsync(m => m.FormDataTypeId == id);
+            if (formDataType == null)
             {
                 return NotFound();
             }
 
-            return View(taxFormSection);
+            return View(formDataType);
         }
 
-        // POST: Admin/TaxFormSections/Delete/5
+        // POST: Admin/FormDataTypes/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var taxFormSection = await _context.TaxFormSections.FindAsync(id);
-            _context.TaxFormSections.Remove(taxFormSection);
+            var formDataType = await _context.FormDataTypes.FindAsync(id);
+            _context.FormDataTypes.Remove(formDataType);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
-        private bool TaxFormSectionExists(int id)
+        private bool FormDataTypeExists(int id)
         {
-            return _context.TaxFormSections.Any(e => e.TaxFormSectionId == id);
+            return _context.FormDataTypes.Any(e => e.FormDataTypeId == id);
         }
     }
 }
