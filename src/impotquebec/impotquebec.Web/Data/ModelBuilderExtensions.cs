@@ -1,7 +1,7 @@
-﻿using impotquebec.Web.Models;
+﻿using Tchaps.Impotquebec.Models;
 using Microsoft.EntityFrameworkCore;
 
-namespace impotquebec.Web.Data
+namespace Tchaps.Impotquebec.Data
 {
     public static class ModelBuilderExtensions
     {

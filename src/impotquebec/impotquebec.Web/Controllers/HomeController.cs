@@ -1,11 +1,11 @@
-﻿using impotquebec.Web.Data;
-using impotquebec.Web.Models;
+﻿using Tchaps.Impotquebec.Data;
+using Tchaps.Impotquebec.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System.Diagnostics;
 
-namespace impotquebec.Web.Controllers
+namespace Tchaps.Impotquebec.Controllers
 {
     public class HomeController : Controller
     {

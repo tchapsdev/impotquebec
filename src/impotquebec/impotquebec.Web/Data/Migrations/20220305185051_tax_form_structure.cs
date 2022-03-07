@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
-namespace impotquebec.Web.Data.Migrations
+namespace Tchaps.Impotquebec.Data.Migrations
 {
     public partial class tax_form_structure : Migration
     {

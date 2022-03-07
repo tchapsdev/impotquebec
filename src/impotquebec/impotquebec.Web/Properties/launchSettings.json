@@ -8,7 +8,7 @@
     }
   },
   "profiles": {
-    "impotquebec.Web": {
+    "Tchaps.Impotquebec": {
       "commandName": "Project",
       "dotnetRunMessages": true,
       "launchBrowser": true,

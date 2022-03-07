@@ -95,22 +95,25 @@
         return isValid;
     }
 
-    var steps = $('#tax_wizard_block').steps({
-        showFooterButtons: false,
-        onFinish: function () {
-            alert('Wizard Completed');
-        }
-    });
+    $(document).ready(function () {
 
-    steps_api = steps.data('plugin_Steps');
+        //var steps = $('#tax_wizard_block').steps({
+        //    showFooterButtons: false,
+        //    onFinish: function () {
+        //        alert('Wizard Completed');
+        //    }
+        //});
 
-    $('#btnPrev').on('click', function () {
-        steps_api.prev();
-    });
+        //steps_api = steps.data('plugin_Steps');
 
-    $('#btnNext').on('click', function () {
-        steps_api.next();
-    });
+        //$('#btnPrev').on('click', function () {
+        //    steps_api.prev();
+        //});
+
+        //$('#btnNext').on('click', function () {
+        //    steps_api.next();
+        //});
+    })    
 
 
 })(tax_service);

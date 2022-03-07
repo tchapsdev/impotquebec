@@ -6,10 +6,10 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
-using impotquebec.Web.Data;
-using impotquebec.Web.Models;
+using Tchaps.Impotquebec.Data;
+using Tchaps.Impotquebec.Models;
 
-namespace impotquebec.Web.Areas.Admin.Controllers
+namespace Tchaps.Impotquebec.Areas.Admin.Controllers
 {
     [Area("Admin")]
     public class TaxFormsController : Controller

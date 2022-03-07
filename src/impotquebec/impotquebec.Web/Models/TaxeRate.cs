@@ -1,4 +1,4 @@
-﻿namespace impotquebec.Web.Models
+﻿namespace Tchaps.Impotquebec.Models
 {
     public class TaxeRate
     {

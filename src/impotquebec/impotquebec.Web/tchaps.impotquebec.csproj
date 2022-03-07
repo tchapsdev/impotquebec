@@ -21,6 +21,11 @@
   <ItemGroup>
     <Folder Include="Areas\Admin\Data\" />
     <Folder Include="Areas\Admin\Models\" />
+    <Folder Include="Data\.backup\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="Data\.backup\aspnet-Tchaps.Impotquebec-3B933E6A-C744-44FB-97CB-8587DA8AD35E.bak" />
   </ItemGroup>
 
 </Project>

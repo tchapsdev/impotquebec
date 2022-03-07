@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using System.ComponentModel.DataAnnotations;
 
-namespace impotquebec.Web.Models
+namespace Tchaps.Impotquebec.Models
 {
     public class Declaration
     {

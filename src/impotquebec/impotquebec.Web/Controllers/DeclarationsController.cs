@@ -6,11 +6,11 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
-using impotquebec.Web.Data;
-using impotquebec.Web.Models;
+using Tchaps.Impotquebec.Data;
+using Tchaps.Impotquebec.Models;
 using Microsoft.AspNetCore.Authorization;
 
-namespace impotquebec.Web.Controllers
+namespace Tchaps.Impotquebec.Controllers
 {
     public class DeclarationsController : SecureBaseController
     {

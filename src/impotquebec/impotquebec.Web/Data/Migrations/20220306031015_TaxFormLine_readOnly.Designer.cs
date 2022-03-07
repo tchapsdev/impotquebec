@@ -5,11 +5,11 @@ using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
-using impotquebec.Web.Data;
+using Tchaps.Impotquebec.Data;
 
 #nullable disable
 
-namespace impotquebec.Web.Data.Migrations
+namespace Tchaps.Impotquebec.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
     [Migration("20220306031015_TaxFormLine_readOnly")]
@@ -24,7 +24,7 @@ namespace impotquebec.Web.Data.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder, 1L, 1);
 
-            modelBuilder.Entity("impotquebec.Web.Models.Declaration", b =>
+            modelBuilder.Entity("Tchaps.Impotquebec.Models.Declaration", b =>
                 {
                     b.Property<int>("DeclarationId")
                         .ValueGeneratedOnAdd()
@@ -85,7 +85,7 @@ namespace impotquebec.Web.Data.Migrations
                     b.ToTable("Declarations");
                 });
 
-            modelBuilder.Entity("impotquebec.Web.Models.DeclarationDetail", b =>
+            modelBuilder.Entity("Tchaps.Impotquebec.Models.DeclarationDetail", b =>
                 {
                     b.Property<float>("DeclarationDetailId")
                         .HasColumnType("real");
@@ -110,7 +110,7 @@ namespace impotquebec.Web.Data.Migrations
                     b.ToTable("DeclarationDetails");
                 });
 
-            modelBuilder.Entity("impotquebec.Web.Models.IdentityProfile", b =>
+            modelBuilder.Entity("Tchaps.Impotquebec.Models.IdentityProfile", b =>
                 {
                     b.Property<int>("IdentityProfileId")
                         .ValueGeneratedOnAdd()
@@ -173,7 +173,7 @@ namespace impotquebec.Web.Data.Migrations
                     b.ToTable("IdentityProfiles");
                 });
 
-            modelBuilder.Entity("impotquebec.Web.Models.TaxForm", b =>
+            modelBuilder.Entity("Tchaps.Impotquebec.Models.TaxForm", b =>
                 {
                     b.Property<int>("TaxFormId")
                         .ValueGeneratedOnAdd()
@@ -207,7 +207,7 @@ namespace impotquebec.Web.Data.Migrations
                         });
                 });
 
-            modelBuilder.Entity("impotquebec.Web.Models.TaxFormLine", b =>
+            modelBuilder.Entity("Tchaps.Impotquebec.Models.TaxFormLine", b =>
                 {
                     b.Property<int>("TaxFormLineId")
                         .ValueGeneratedOnAdd()
@@ -251,7 +251,7 @@ namespace impotquebec.Web.Data.Migrations
                     b.ToTable("TaxFormLines");
                 });
 
-            modelBuilder.Entity("impotquebec.Web.Models.TaxFormSection", b =>
+            modelBuilder.Entity("Tchaps.Impotquebec.Models.TaxFormSection", b =>
                 {
                     b.Property<int>("TaxFormSectionId")
                         .ValueGeneratedOnAdd()
@@ -543,9 +543,9 @@ namespace impotquebec.Web.Data.Migrations
                     b.ToTable("AspNetUserTokens", (string)null);
                 });
 
-            modelBuilder.Entity("impotquebec.Web.Models.Declaration", b =>
+            modelBuilder.Entity("Tchaps.Impotquebec.Models.Declaration", b =>
                 {
-                    b.HasOne("impotquebec.Web.Models.TaxForm", "TaxForm")
+                    b.HasOne("Tchaps.Impotquebec.Models.TaxForm", "TaxForm")
                         .WithMany()
                         .HasForeignKey("TaxFormId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -562,16 +562,16 @@ namespace impotquebec.Web.Data.Migrations
                     b.Navigation("User");
                 });
 
-            modelBuilder.Entity("impotquebec.Web.Models.DeclarationDetail", b =>
+            modelBuilder.Entity("Tchaps.Impotquebec.Models.DeclarationDetail", b =>
                 {
-                    b.HasOne("impotquebec.Web.Models.Declaration", null)
+                    b.HasOne("Tchaps.Impotquebec.Models.Declaration", null)
                         .WithMany("Details")
                         .HasForeignKey("DeclarationId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("impotquebec.Web.Models.IdentityProfile", b =>
+            modelBuilder.Entity("Tchaps.Impotquebec.Models.IdentityProfile", b =>
                 {
                     b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser", "User")
                         .WithMany()
@@ -582,15 +582,15 @@ namespace impotquebec.Web.Data.Migrations
                     b.Navigation("User");
                 });
 
-            modelBuilder.Entity("impotquebec.Web.Models.TaxFormLine", b =>
+            modelBuilder.Entity("Tchaps.Impotquebec.Models.TaxFormLine", b =>
                 {
-                    b.HasOne("impotquebec.Web.Models.TaxForm", "TaxForm")
+                    b.HasOne("Tchaps.Impotquebec.Models.TaxForm", "TaxForm")
                         .WithMany("TaxFormLines")
                         .HasForeignKey("TaxFormId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("impotquebec.Web.Models.TaxFormSection", "TaxFormSection")
+                    b.HasOne("Tchaps.Impotquebec.Models.TaxFormSection", "TaxFormSection")
                         .WithMany()
                         .HasForeignKey("TaxFormSectionId");
 
@@ -599,9 +599,9 @@ namespace impotquebec.Web.Data.Migrations
                     b.Navigation("TaxFormSection");
                 });
 
-            modelBuilder.Entity("impotquebec.Web.Models.TaxFormSection", b =>
+            modelBuilder.Entity("Tchaps.Impotquebec.Models.TaxFormSection", b =>
                 {
-                    b.HasOne("impotquebec.Web.Models.TaxForm", "TaxForm")
+                    b.HasOne("Tchaps.Impotquebec.Models.TaxForm", "TaxForm")
                         .WithMany("TaxFormSections")
                         .HasForeignKey("TaxFormId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -661,12 +661,12 @@ namespace impotquebec.Web.Data.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("impotquebec.Web.Models.Declaration", b =>
+            modelBuilder.Entity("Tchaps.Impotquebec.Models.Declaration", b =>
                 {
                     b.Navigation("Details");
                 });
 
-            modelBuilder.Entity("impotquebec.Web.Models.TaxForm", b =>
+            modelBuilder.Entity("Tchaps.Impotquebec.Models.TaxForm", b =>
                 {
                     b.Navigation("TaxFormLines");
 

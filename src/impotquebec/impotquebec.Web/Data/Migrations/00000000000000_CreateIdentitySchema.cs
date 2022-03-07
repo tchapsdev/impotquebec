@@ -2,7 +2,7 @@
 using Microsoft.EntityFrameworkCore.Migrations;
 using System;
 
-namespace impotquebec.Web.Data.Migrations
+namespace Tchaps.Impotquebec.Data.Migrations
 {
     public partial class CreateIdentitySchema : Migration
     {

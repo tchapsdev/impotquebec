@@ -2,7 +2,7 @@
 
 #nullable disable
 
-namespace impotquebec.Web.Data.Migrations
+namespace Tchaps.Impotquebec.Data.Migrations
 {
     public partial class TaxFormLine_FormDataTypes : Migration
     {

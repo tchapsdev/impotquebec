@@ -1,4 +1,4 @@
-﻿namespace impotquebec.Web.Models
+﻿namespace Tchaps.Impotquebec.Models
 {
     public class TaxFormSection: NamedEntity
     {
@@ -13,6 +13,6 @@
         public string InternalName { get; set; }
         public string LineNumbers { get; set; }// [12,,563, ]
         public int Rank { get; set; }
-        public IList<TaxFormLine> TaxFormLines { get; set; }
+        public virtual IList<TaxFormLine> TaxFormLines { get; set; }
     }
 }

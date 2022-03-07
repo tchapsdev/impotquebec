@@ -6,10 +6,10 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using impotquebec.Web.Data;
-using impotquebec.Web.Models;
+using Tchaps.Impotquebec.Data;
+using Tchaps.Impotquebec.Models;
 
-namespace impotquebec.Web.Controllers.Api
+namespace Tchaps.Impotquebec.Controllers.Api
 {
     [Route("api/[controller]")]
     [ApiController]
