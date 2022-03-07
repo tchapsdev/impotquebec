@@ -25,18 +25,24 @@
                          <label for="id_{{taxFormLineId}}">
                            {{{name}}}
                         </label>
-                    </td>                    
+                    </td>
                     <td>
                         <input 
                         {{#formDataType.isTextBox}}
                             type="{{formDataType.name}}" 
                         {{/formDataType.isTextBox}}
-
-                         {{^formDataType.isTextBox}}
+                        {{^formDataType.isTextBox}}
                             type="text" 
                         {{/formDataType.isTextBox}}
 
-                        class="form-control" name="l_{{lineNumber}}" id="id_{{taxFormLineId}}" data-lineNumber="{{lineNumber}}"
+                        {{#formDataType.isCheckBox}}
+                           class="form-check-input" 
+                        {{/formDataType.isCheckBox}}
+                        {{^formDataType.isCheckBox}}
+                           class="form-control" 
+                        {{/formDataType.isCheckBox}}                        
+                        
+                        name="l_{{lineNumber}}" id="id_{{taxFormLineId}}" data-lineNumber="{{lineNumber}}"
                                    {{#isRequired}}
                                     required
                                    {{/isRequired}}

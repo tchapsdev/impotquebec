@@ -5,7 +5,7 @@
         public int FormDataTypeId { get; set; }
         public string Name { get; set; }
 
-        public bool IsTextBox => Name == "Text" || Name == "Number" || Name == "Date";
+        public bool IsTextBox => Name == "Text" || Name == "Number" || Name == "Date" || Name == "Checkbox";
         public bool IsCheckBox => Name == "Checkbox";
         public bool IsCheckboxList => Name == "CheckboxList";
         public bool IsDropdown => Name == "Dropdown";

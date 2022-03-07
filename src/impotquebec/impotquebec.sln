@@ -3,9 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.1.32210.238
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "impotquebec.Web", "impotquebec.Web\impotquebec.Web.csproj", "{BA5696F5-A76B-42F6-95C6-8E8358E8C6A1}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "tchaps.impotquebec", "impotquebec.Web\tchaps.impotquebec.csproj", "{BA5696F5-A76B-42F6-95C6-8E8358E8C6A1}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "impotquebec.Website", "impotquebec.Website\impotquebec.Website.csproj", "{D6028906-DBA2-45A3-85C1-B2B45FC249DA}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "tchaps.Website", "impotquebec.Website\tchaps.Website.csproj", "{D6028906-DBA2-45A3-85C1-B2B45FC249DA}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

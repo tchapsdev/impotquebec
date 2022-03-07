@@ -45,7 +45,7 @@
     let LoadTaxWizard = function () {
         setTimeout(function () {
             console.log('calling step wizard...');
-            $('#demo').steps({
+            $('#tax_wizard_block').steps({
                 onFinish: function () {
                     alert('Wizard Completed');
                 }
@@ -74,6 +74,43 @@
         else
             document.getElementById(targetId).innerHTML = rendered;
     }
+
+    function validateFormId(formId) {
+        let isValid = true;
+        $(`#${formId} :input`).each(function () {
+            // This is the jquery object of the input, do what you will
+            let fieldId = $(this).attr('id');
+            let req = $(this).attr('required');
+            let value = $('#' + fieldId).val();
+            if (req && (!value || value.length < 1)) {
+                $('#' + fieldId).addClass('is-invalid');
+                $('#' + fieldId).removeClass('is-valid');
+                isValid = false;
+                console.log(`The field '${fieldId}' in form '${formId}' is invalid`);
+            } else {
+                $('#' + fieldId).addClass('is-valid');
+                $('#' + fieldId).removeClass('is-invalid');
+            }
+        });
+        return isValid;
+    }
+
+    var steps = $('#tax_wizard_block').steps({
+        showFooterButtons: false,
+        onFinish: function () {
+            alert('Wizard Completed');
+        }
+    });
+
+    steps_api = steps.data('plugin_Steps');
+
+    $('#btnPrev').on('click', function () {
+        steps_api.prev();
+    });
+
+    $('#btnNext').on('click', function () {
+        steps_api.next();
+    });
 
 
 })(tax_service);
