@@ -6,7 +6,7 @@
         console.log(taxFormId);
         httpservice.get(`TaxForms/${taxFormId}`, { id: taxFormId },
             function (result) {
-                renderDossierChangeList(result);
+                renderDossierChangeList(result, LoadTaxWizard);
             },
             function () {
 
@@ -14,27 +14,44 @@
         )
     };
 
-    let renderDossierChangeList = function (taxForm) {
+    let renderDossierChangeList = function (taxForm, callBack) {
         let sections = taxForm.taxFormSections
-        for (let i = 0; i < sections.length; i++) {
-            let section = sections[i];
-            renderSectionWizardTitle(section);           
-        }
 
         renderSectionWizardBlock(taxForm);
 
+        for (let i = 0; i < sections.length; i++) {
+            let section = sections[i];
+            console.log(section.name + " " + section.rank);
+            renderSectionWizardTitle(section);           
+        }
+               
         function renderSectionWizardTitle(section) {
             let target_id = "step_steps_block";
             let template = `<li data-step-target="step${section.rank}">${section.name}</li> `
             document.getElementById(target_id).innerHTML += template;
         }
 
-        function renderSectionWizardBlock(section) {
+        function renderSectionWizardBlock(taxForm) {
             let templateId = 'section-item-template';
             let target_id = 'step_content_block';
-            mustacheRenderDataInTemplate(section, templateId, target_id, true);
+            mustacheRenderDataInTemplate(taxForm, templateId, target_id, true);
+        }
+
+        if (callBack && typeof callBack == 'function') {
+            callBack();
         }
     };
+
+    let LoadTaxWizard = function () {
+        setTimeout(function () {
+            console.log('calling step wizard...');
+            $('#demo').steps({
+                onFinish: function () {
+                    alert('Wizard Completed');
+                }
+            }, 2000)
+        });
+    }
 
     /**
      * render Data In Template using Mustache

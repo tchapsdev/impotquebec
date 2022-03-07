@@ -17,7 +17,7 @@
         public virtual TaxFormSection? TaxFormSection { get; set; }
 
         public int? FormDataTypeId { get; set; }
-        [System.Text.Json.Serialization.JsonIgnore]
+        //[System.Text.Json.Serialization.JsonIgnore]
         public virtual FormDataType? FormDataType { get; set; }
 
         public string? ItemLists { get; set; }
