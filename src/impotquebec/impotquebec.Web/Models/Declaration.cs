@@ -40,5 +40,43 @@ namespace Tchaps.Impotquebec.Models
         public DateTime? Modified { get; set; }
 
         public IList<DeclarationDetail> Details { get; set; }
+
+
+        #region Methods
+
+        public DeclarationDetail GetTaxLine( float lineNumber)
+        {
+            return Details.FirstOrDefault(d => d.LineNumber == lineNumber);
+        }
+
+        public void SetTaxLine(float lineNumber, decimal value)
+        {
+            var taxLine = GetTaxLine(lineNumber);
+            if (taxLine == null) return;
+            taxLine.Value = $"{value}";
+        }
+
+        public decimal GetSumLines(float[] lineNumbers)
+        {
+            return Details.Where(d => lineNumbers
+                        .Contains(d.LineNumber) && !string.IsNullOrWhiteSpace(d.Value))
+                        .Sum(x => decimal.Parse(x.Value));
+        }
+
+        public decimal GetValueFromLine(float lineNumber)
+        {
+            var taxLine = GetTaxLine(lineNumber);
+            if (taxLine == null || string.IsNullOrWhiteSpace(taxLine.Value)) return 0;
+            decimal.TryParse(taxLine.Value, out var result);
+            return result;
+        }
+
+        public decimal GetDiffLines(float lineNumber1, float lineNumber2)
+        {
+            return GetValueFromLine(lineNumber1) - GetValueFromLine(lineNumber2);
+        }
+        #endregion
+
+
     }
 }
