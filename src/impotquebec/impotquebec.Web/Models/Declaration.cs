@@ -36,8 +36,8 @@ namespace Tchaps.Impotquebec.Models
 
         public string History { get; set; }
 
-        public DateTime Created { get; set; }
-        public DateTime Modified { get; set; }
+        public DateTime? Created { get; set; }
+        public DateTime? Modified { get; set; }
 
         public IList<DeclarationDetail> Details { get; set; }
     }

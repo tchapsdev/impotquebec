@@ -1,11 +1,14 @@
 ﻿var tax_service = {};
 (function (tax_service) {
 
+    let taxFormModel = {};
+
     tax_service.init_declaration = function () {
         let taxFormId = $('#TaxFormId').val();
         console.log(taxFormId);
         httpservice.get(`TaxForms/${taxFormId}`, { id: taxFormId },
             function (result) {
+                taxFormModel = result;
                 renderDossierChangeList(result, LoadTaxWizard);
             },
             function () {
@@ -46,7 +49,17 @@
         setTimeout(function () {
             console.log('calling step wizard...');
             $('#tax_wizard_block').steps({
+                onChange: function (currentIndex, newIndex, stepDirection) {
+                   
+                    if (stepDirection === 'forward') {
+                        let tab_id = $(`#tab_step_${++currentIndex}`).attr('id');
+                        return validateFormId(tab_id);
+                    }                      
+                    
+                    return true;
+                },
                 onFinish: function () {
+                    saveDeclarationForm();
                     alert('Wizard Completed');
                 }
             }, 2000)
@@ -88,32 +101,83 @@
                 isValid = false;
                 console.log(`The field '${fieldId}' in form '${formId}' is invalid`);
             } else {
-                $('#' + fieldId).addClass('is-valid');
+                //$('#' + fieldId).addClass('is-valid');
                 $('#' + fieldId).removeClass('is-invalid');
             }
         });
         return isValid;
     }
 
-    $(document).ready(function () {
+    $(document).ready(function () {                
 
-        //var steps = $('#tax_wizard_block').steps({
-        //    showFooterButtons: false,
-        //    onFinish: function () {
-        //        alert('Wizard Completed');
-        //    }
-        //});
+        $('.step-btn').on('click', function (e) {
+            e.preventDefault();
 
-        //steps_api = steps.data('plugin_Steps');
+            var steps = $('#tax_wizard_block').steps();
+            let steps_api = steps.data('plugin_Steps');
+            var idx = steps_api.getStepIndex();
+            let tab_id = $(`#tab_step_${++idx}`).attr('id');
+            if (validateFormId(tab_id)) {
+                return;
+                console.log(`Data not valid .`);
+            }
 
-        //$('#btnPrev').on('click', function () {
-        //    steps_api.prev();
-        //});
+            let action = $(this).attr('data-step-action');
+            console.log(action);
+            
+            console.log(idx);
+            steps_api.prev();
 
-        //$('#btnNext').on('click', function () {
-        //    steps_api.next();
-        //});
-    })    
+            
+
+            getTaxFormData();
+        });
+
+    })
+
+    function saveDeclarationForm() {
+        var declaration = getTaxFormData();
+    }
+
+    function getTaxFormData() {
+        let sections = taxFormModel.taxFormSections;
+
+        let details = [];
+
+        let declarationId = $('#DeclarationId').val();
+
+        for (let i = 0; i < sections.length; i++) {
+            let section = sections[i];
+            for (let j = 0; j < section.taxFormLines.length; j++) {
+                let taxFormLine = section.taxFormLines[j];
+                taxFormLine.value = $(`#id_${taxFormLine.taxFormLineId}`).val();
+                let detail = {
+                    declarationId: declarationId,
+                    declarationDetailId: 0,
+                    taxFormLineId: taxFormLine.taxFormLineId,
+                    LineNumber: taxFormLine.lineNumber,
+                    value: taxFormLine.value
+                }
+                details.push(detail);
+            }
+            console.log(section);
+
+        //      public int DeclarationId { get; set; }
+        //public float DeclarationDetailId { get; set; }
+        //public int TaxFormLineId { get; set; }
+        //public float LineNumber { get; set; }
+        //public string Value { get; set; }
+        }
+
+        return {
+            declarationId: declarationId,
+            taxFormId: taxFormModel.taxFormId,           
+            fiscalYear: $('#FiscalYear').val(),
+            userId: $('#UserId').val(),
+            taxForm: taxFormModel,
+            details: details
+        }
+    }
 
 
 })(tax_service);

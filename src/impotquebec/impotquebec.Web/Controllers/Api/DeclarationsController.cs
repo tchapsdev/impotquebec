@@ -45,7 +45,7 @@ namespace Tchaps.Impotquebec.Controllers.Api
 
         // PUT: api/Declarations/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
-        [HttpPut("{id}")]
+        [HttpPost("{id}")]
         public async Task<IActionResult> PutDeclaration(int id, Declaration declaration)
         {
             if (id != declaration.DeclarationId)
@@ -53,10 +53,20 @@ namespace Tchaps.Impotquebec.Controllers.Api
                 return BadRequest();
             }
 
-            _context.Entry(declaration).State = EntityState.Modified;
+           
 
             try
             {
+                if (declaration.DeclarationId == 0)
+                {
+                    _context.Declarations.Add(declaration);
+                }
+                else
+                {
+                    var model = _context.Declarations.FindAsync(declaration.DeclarationId);
+
+                }
+
                 await _context.SaveChangesAsync();
             }
             catch (DbUpdateConcurrencyException)
@@ -74,32 +84,32 @@ namespace Tchaps.Impotquebec.Controllers.Api
             return NoContent();
         }
 
-        // POST: api/Declarations
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
-        [HttpPost]
-        public async Task<ActionResult<Declaration>> PostDeclaration(Declaration declaration)
-        {
-            _context.Declarations.Add(declaration);
-            await _context.SaveChangesAsync();
+        //// POST: api/Declarations
+        //// To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
+        //[HttpPost]
+        //public async Task<ActionResult<Declaration>> PostDeclaration(Declaration declaration)
+        //{
+        //    _context.Declarations.Add(declaration);
+        //    await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetDeclaration", new { id = declaration.DeclarationId }, declaration);
-        }
+        //    return CreatedAtAction("GetDeclaration", new { id = declaration.DeclarationId }, declaration);
+        //}
 
-        // DELETE: api/Declarations/5
-        [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteDeclaration(int id)
-        {
-            var declaration = await _context.Declarations.FindAsync(id);
-            if (declaration == null)
-            {
-                return NotFound();
-            }
+        //// DELETE: api/Declarations/5
+        //[HttpDelete("{id}")]
+        //public async Task<IActionResult> DeleteDeclaration(int id)
+        //{
+        //    var declaration = await _context.Declarations.FindAsync(id);
+        //    if (declaration == null)
+        //    {
+        //        return NotFound();
+        //    }
 
-            _context.Declarations.Remove(declaration);
-            await _context.SaveChangesAsync();
+        //    _context.Declarations.Remove(declaration);
+        //    await _context.SaveChangesAsync();
 
-            return NoContent();
-        }
+        //    return NoContent();
+        //}
 
         private bool DeclarationExists(int id)
         {

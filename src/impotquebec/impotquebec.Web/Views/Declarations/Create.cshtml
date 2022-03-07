@@ -11,6 +11,7 @@
 
 <div class="row">
     <form asp-action="Create" id="tax_Form">
+        <input asp-for="DeclarationId" class="form-control" type="hidden"/>
         <input asp-for="UserId" class="form-control" type="hidden"/>
         <input asp-for="TaxFormId" class="form-control" type="hidden"/>
         <div asp-validation-summary="ModelOnly" class="text-danger"></div>
@@ -19,25 +20,27 @@
                 <input asp-for="FiscalYear" class="form-control" maxlength='4' min='2020'/>
                 <span asp-validation-for="FiscalYear" class="text-danger"></span>
             </div>
+
+            <div class='row'>    
+        <div class="step-app" id="tax_wizard_block">
+          <ul class="step-steps" id='step_steps_block'>        
+        
+          </ul>
+          <div class="step-content" id='step_content_block'>
+        
+          </div>
+          <div class="step-footer">
+            <button data-step-action="prev" class="step-btn">Previous</button>
+            <button data-step-action="next" class="step-btn">Next</button>
+            <button data-step-action="finish" class="step-btn">Finish</button>
+          </div>
+        </div>
+</div>
            
         </form>
 </div>
 <br />
-<div class='row'>    
-    <div class="step-app" id="tax_wizard_block">
-      <ul class="step-steps" id='step_steps_block'>        
-        
-      </ul>
-      <div class="step-content" id='step_content_block'>
-        
-      </div>
-      <div class="step-footer">
-        <button data-step-action="prev" class="step-btn">Previous</button>
-        <button data-step-action="next" class="step-btn">Next</button>
-        <button data-step-action="finish" class="step-btn">Finish</button>
-      </div>
-    </div>
-</div>
+
 
 <div>
     <a asp-action="Index">Back to List</a>
