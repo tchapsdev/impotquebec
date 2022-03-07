@@ -37,9 +37,9 @@
                 @Html.DisplayFor(modelItem => item.Description)
             </td>
             <td>
-                <a asp-area="Admin" asp-controller="TaxForms" asp-action="Edit" asp-route-id="@item.TaxFormId"><i class='fa fa-edit'></i></a> |
+                @*<a asp-area="Admin" asp-controller="TaxForms" asp-action="Edit" asp-route-id="@item.TaxFormId"><i class='fa fa-edit'></i></a> |*@
                 <a asp-area="Admin" asp-controller="TaxForms" asp-action="Details" asp-route-id="@item.TaxFormId"><i class='fa fa-eye'></i></a> |
-                <a asp-area="Admin" asp-controller="TaxForms" asp-action="Delete" asp-route-id="@item.TaxFormId"><i class='fa fa-remove'></i></a>
+                @*<a asp-area="Admin" asp-controller="TaxForms" asp-action="Delete" asp-route-id="@item.TaxFormId"><i class='fa fa-remove'></i></a>*@
             </td>
         </tr>
 }
