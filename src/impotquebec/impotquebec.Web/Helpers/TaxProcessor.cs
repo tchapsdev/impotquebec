@@ -10,18 +10,23 @@ namespace Tchaps.Impotquebec.Helpers
             // Line 199 calculation: Total income. Add lines 101 and 105 through 164. 
             declaration.SetTaxLine( 199, declaration.GetSumLines(
                 new float[] { 101, 105, 107, 110, 111, 114, 119, 122, 123, 128, 130, 136, 139, 142, 147, 148, 154, 164 }));
+            declaration.TotalIncome = declaration.GetValueFromLine(199);
+
             #endregion
 
             #region Net income
             // Line 254 calculation: Total deductions. Add lines 201 through 207, 214 through 231, and 234 through 252. 
             declaration.SetTaxLine(254, declaration.GetSumLines(
                 new float[] { 201, 205, 207, 214, 225, 228, 231, 234, 236, 241, 245, 246, 248, 250, 252 }));
+            declaration.TotalDeductions = declaration.GetValueFromLine(254);
 
             // Line 256 calculation: Subtract line 254 from line 199.
             declaration.SetTaxLine(256, declaration.GetDiffLines(199, 254));
 
             // Line 275 calculation: Net income. Add lines 256 and 260. 
             declaration.SetTaxLine(275, declaration.GetSumLines( new float[] { 256, 260 }));
+            declaration.NetIncome = declaration.GetValueFromLine(275);
+
             #endregion
 
             #region Taxable income
@@ -36,6 +41,7 @@ namespace Tchaps.Impotquebec.Helpers
             // Line 299 calculation: Subtract line 298 from line 279. If the result is negative, enter 0. Taxable income
             var taxableImcome = declaration.GetDiffLines(279, 298);
             declaration.SetTaxLine(299, taxableImcome > 0 ? taxableImcome : 0);
+            declaration.TaxableIncome = declaration.GetValueFromLine(299);
 
             #endregion
 
@@ -63,6 +69,8 @@ namespace Tchaps.Impotquebec.Helpers
             // Line 399 calculation: Add lines 377.1, 389 through 392, 395 through 397, 398 and 398.1. Non-refundable tax credits
             declaration.SetTaxLine(377, declaration.GetSumLines(
                 new float[] { 389, 390, 391, 392, 395, 396, 397, 398, 398.1f }));
+            declaration.NonRefundableTaxCredits = declaration.GetValueFromLine(377);
+
             #endregion
 
             #region Income tax and contributions
@@ -87,6 +95,7 @@ namespace Tchaps.Impotquebec.Helpers
             // Line 450 calculation: Add lines 432 through 447.  Income tax and contributions
             declaration.SetTaxLine(450, declaration.GetSumLines(
                 new float[] { 432, 438, 439, 441, 443, 445, 446, 447 }));
+            declaration.IncomeTaxAndContributions = declaration.GetValueFromLine(450);
 
             #endregion
 

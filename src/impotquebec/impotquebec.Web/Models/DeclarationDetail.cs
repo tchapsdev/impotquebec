@@ -2,8 +2,8 @@
 {
     public class DeclarationDetail
     {
+        public int DeclarationDetailId { get; set; }
         public int DeclarationId { get; set; }
-        public float DeclarationDetailId { get; set; }
         public int TaxFormLineId { get; set; }
         public float LineNumber { get; set; }
         public string Value { get; set; }

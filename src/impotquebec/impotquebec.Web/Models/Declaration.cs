@@ -29,9 +29,9 @@ namespace Tchaps.Impotquebec.Models
         [System.Text.Json.Serialization.JsonIgnore]
         public TaxForm? TaxForm { get; set; }
 
-        public string UserId { get; set; }
+        public Guid UserId { get; set; }
         [System.Text.Json.Serialization.JsonIgnore]
-        public IdentityUser? User { get; set; }
+        public AppUser? User { get; set; }
 
 
         public string History { get; set; }
@@ -60,7 +60,7 @@ namespace Tchaps.Impotquebec.Models
         {
             return Details.Where(d => lineNumbers
                         .Contains(d.LineNumber) && !string.IsNullOrWhiteSpace(d.Value))
-                        .Sum(x => decimal.Parse(x.Value));
+                        .Sum(x => GetValueFromLine(x.LineNumber));
         }
 
         public decimal GetValueFromLine(float lineNumber)

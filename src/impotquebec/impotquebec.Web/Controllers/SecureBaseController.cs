@@ -2,13 +2,14 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Tchaps.Impotquebec.Models;
 
 namespace Tchaps.Impotquebec.Controllers
 {
     //[Authorize]
     public class SecureBaseController : Controller
     {
-        protected IdentityUser CurrentUser = new();
+        protected AppUser CurrentUser = new();
 
         protected readonly ApplicationDbContext _context;
         public SecureBaseController(ApplicationDbContext context)
@@ -18,7 +19,7 @@ namespace Tchaps.Impotquebec.Controllers
                 CurrentUser = GetUser(User.Identity.Name);
         }
 
-        protected IdentityUser GetUser(string userName)
+        protected AppUser GetUser(string userName)
         {
             return _context.Users.FirstOrDefault(u => u.NormalizedUserName == userName.ToUpper());
         }

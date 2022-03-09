@@ -7,11 +7,13 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Tchaps.Impotquebec.Data;
+using Tchaps.Impotquebec.Helpers;
 using Tchaps.Impotquebec.Models;
 
 namespace Tchaps.Impotquebec.Controllers.Api
 {
     [Route("api/[controller]")]
+   // [Produces("application/json")]
     [ApiController]
     public class DeclarationsController : ControllerBase
     {
@@ -46,19 +48,21 @@ namespace Tchaps.Impotquebec.Controllers.Api
         // PUT: api/Declarations/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost("{id}")]
-        public async Task<IActionResult> PutDeclaration(int id, Declaration declaration)
+        public async Task<IActionResult> PostDeclaration(int id, [FromBody]Declaration declaration)
         {
-            if (id != declaration.DeclarationId)
-            {
-                return BadRequest();
-            }
+            //if (id != declaration.DeclarationId)
+            //{
+            //    return BadRequest();
+            //}
 
-           
+            TaxProcessor.ProcessTp1Lines(declaration);
 
             try
             {
                 if (declaration.DeclarationId == 0)
                 {
+                    declaration.Created = DateTime.UtcNow;
+                    declaration.Modified = DateTime.UtcNow;
                     _context.Declarations.Add(declaration);
                 }
                 else
@@ -68,6 +72,7 @@ namespace Tchaps.Impotquebec.Controllers.Api
                 }
 
                 await _context.SaveChangesAsync();
+                return Ok(declaration.DeclarationId);
             }
             catch (DbUpdateConcurrencyException)
             {

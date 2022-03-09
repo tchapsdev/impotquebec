@@ -2,6 +2,7 @@
 (function (tax_service) {
 
     let taxFormModel = {};
+    let declaration = {};
 
     tax_service.init_declaration = function () {
         let taxFormId = $('#TaxFormId').val();
@@ -126,56 +127,54 @@
             console.log(action);
             
             console.log(idx);
-            steps_api.prev();
+            steps_api.prev();            
 
-            
-
-            getTaxFormData();
+            //getTaxFormDeclarationData();
         });
 
     })
 
     function saveDeclarationForm() {
-        var declaration = getTaxFormData();
+        let Declaration = getTaxFormDeclarationData();
+        let declarationId = $('#DeclarationId').val();
+        httpservice.post(`Declarations/${declarationId}`, Declaration ,
+            function (result) {
+                console.log(result);
+            },
+            function (Err) {
+
+            });
     }
 
-    function getTaxFormData() {
+    function getTaxFormDeclarationData() {
         let sections = taxFormModel.taxFormSections;
-
         let details = [];
-
         let declarationId = $('#DeclarationId').val();
-
         for (let i = 0; i < sections.length; i++) {
             let section = sections[i];
             for (let j = 0; j < section.taxFormLines.length; j++) {
                 let taxFormLine = section.taxFormLines[j];
                 taxFormLine.value = $(`#id_${taxFormLine.taxFormLineId}`).val();
                 let detail = {
-                    declarationId: declarationId,
-                    declarationDetailId: 0,
-                    taxFormLineId: taxFormLine.taxFormLineId,
+                    DeclarationId: declarationId,
+                    DeclarationDetailId: 0,
+                    TaxFormLineId: taxFormLine.taxFormLineId,
                     LineNumber: taxFormLine.lineNumber,
-                    value: taxFormLine.value
+                    Value: taxFormLine.value
                 }
                 details.push(detail);
             }
             console.log(section);
-
-        //      public int DeclarationId { get; set; }
-        //public float DeclarationDetailId { get; set; }
-        //public int TaxFormLineId { get; set; }
-        //public float LineNumber { get; set; }
-        //public string Value { get; set; }
         }
 
         return {
-            declarationId: declarationId,
-            taxFormId: taxFormModel.taxFormId,           
-            fiscalYear: $('#FiscalYear').val(),
-            userId: $('#UserId').val(),
-            taxForm: taxFormModel,
-            details: details
+            DeclarationId: declarationId,
+            TaxFormId: taxFormModel.taxFormId,           
+            FiscalYear: $('#FiscalYear').val(),
+            UserId: $('#UserId').val(),
+            TaxForm: taxFormModel,
+            Details: details,
+            History: "",
         }
     }
 
