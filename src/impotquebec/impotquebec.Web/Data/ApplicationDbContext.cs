@@ -21,7 +21,6 @@ namespace Tchaps.Impotquebec.Data
         public DbSet<Declaration> Declarations { get; set; }
         public DbSet<DeclarationDetail> DeclarationDetails { get; set; }
         public DbSet<TaxFormSection> TaxFormSections { get; set; }
-        //public DbSet<AppUser> IdentityProfiles { get; set; }
         public DbSet<TaxForm> TaxForms { get; set; }
         public DbSet<TaxFormLine> TaxFormLines { get; set; }
         public DbSet<FormDataType> FormDataTypes { get; set; }
