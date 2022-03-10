@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Tchaps.Impotquebec.Models;
+using Microsoft.AspNetCore.Mvc.Filters;
 
 namespace Tchaps.Impotquebec.Controllers
 {
@@ -15,14 +16,23 @@ namespace Tchaps.Impotquebec.Controllers
         public SecureBaseController(ApplicationDbContext context)
         {
             _context = context;
-            if (User != null)
-                CurrentUser = GetUser(User.Identity.Name);
         }
 
-        protected AppUser GetUser(string userName)
+        protected AppUser GetCurrentUser()
         {
-            return _context.Users.FirstOrDefault(u => u.NormalizedUserName == userName.ToUpper());
+            if (!string.IsNullOrEmpty(CurrentUser.UserName) || User == null)
+                return CurrentUser;
+            var user =  _context.Users.FirstOrDefault(u => u.NormalizedUserName == User.Identity.Name.ToUpper());
+            if (user != null)
+                CurrentUser = user;
+            return CurrentUser;
         }
-       
+
+        public override void OnActionExecuting(ActionExecutingContext context)
+        {
+            GetCurrentUser();
+            base.OnActionExecuting(context);    
+        }
+
     }
 }

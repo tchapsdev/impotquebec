@@ -20,6 +20,7 @@ namespace Tchaps.Impotquebec.Controllers
 
         public async Task<IActionResult> Index()
         {
+            
             return View(await _context.TaxForms.ToListAsync());
         }
 

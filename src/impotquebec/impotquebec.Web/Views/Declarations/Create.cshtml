@@ -13,6 +13,18 @@
     <form asp-action="Create" id="tax_Form">
         <input asp-for="DeclarationId" class="form-control" type="hidden"/>
         <input asp-for="UserId" class="form-control" type="hidden"/>
+        <input asp-for="User.Email" class="form-control" type="hidden"/>
+        <input asp-for="User.FirstName" class="form-control" type="hidden"/>
+        <input asp-for="User.LastName" class="form-control" type="hidden"/>
+        <input asp-for="User.Sex" class="form-control" type="hidden"/>
+        <input asp-for="User.AddressApartment" class="form-control" type="hidden"/>
+        <input asp-for="User.AddressMunicipality" class="form-control" type="hidden"/>
+        <input asp-for="User.AddressPostalCode" class="form-control" type="hidden"/>
+        <input asp-for="User.AddressProvince" class="form-control" type="hidden"/>
+        <input asp-for="User.AddressStreetName" class="form-control" type="hidden"/>
+        <input asp-for="User.AddressStreetNumber" class="form-control" type="hidden"/>
+        <input asp-for="User.Birthdate" class="form-control" type="hidden"/>
+        <input asp-for="User.Language" class="form-control" type="hidden"/>
         <input asp-for="TaxFormId" class="form-control" type="hidden"/>
         <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
