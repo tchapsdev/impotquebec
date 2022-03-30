@@ -45,6 +45,7 @@ steps:
 
 # do this after other tasks such as building
 - task: DotNetCoreCLI@2
+  displayName: 'dotnet test $(buildConfiguration)'
   inputs:
     command: test
     projects: '**/*Tests/*.csproj'
@@ -55,6 +56,7 @@ steps:
 #     targetFolder: '$(Build.ArtifactStagingDirectory)'  
   
 - task: DotNetCoreCLI@2
+  displayName: 'dotnet publish $(buildConfiguration)'
   inputs:
     command: publish
     publishWebProjects: True
@@ -63,6 +65,7 @@ steps:
 
 # this code takes all the files in $(Build.ArtifactStagingDirectory) and uploads them as an artifact of your build.
 - task: PublishPipelineArtifact@1
+  displayName: 'dotnet publish artifac $(buildConfiguration)'
   inputs:
     targetPath: '$(Build.ArtifactStagingDirectory)' 
     artifactName: 'tchaps.impotquebec'
