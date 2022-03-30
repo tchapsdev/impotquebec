@@ -29,7 +29,7 @@ steps:
   displayName: Restore
   inputs:
     command: restore
-    projects: '**/*.csproj'
+    projects: 'src/impotquebec/impotquebec.Web/tchaps.impotquebec.csproj'
     feedsToUse: 'select'
     vstsFeed: 'tchapsdev'
     includeNuGetOrg: true
@@ -61,7 +61,7 @@ steps:
     command: publish
     publishWebProjects: True
     arguments: '--configuration $(BuildConfiguration) --output $(Build.ArtifactStagingDirectory)'
-    zipAfterPublish: True
+#   zipAfterPublish: True
 
 # this code takes all the files in $(Build.ArtifactStagingDirectory) and uploads them as an artifact of your build.
 - task: PublishPipelineArtifact@1
