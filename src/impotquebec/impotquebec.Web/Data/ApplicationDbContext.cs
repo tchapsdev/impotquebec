@@ -15,6 +15,7 @@ namespace Tchaps.Impotquebec.Data
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
+            modelBuilder.Configure();
             modelBuilder.Seed();
         }
         #endregion
