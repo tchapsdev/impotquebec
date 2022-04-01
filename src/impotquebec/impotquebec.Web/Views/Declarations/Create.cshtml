@@ -27,27 +27,39 @@
         <input asp-for="User.Language" class="form-control" type="hidden"/>
         <input asp-for="TaxFormId" class="form-control" type="hidden"/>
         <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <br />
             <div class="form-group">
                 <label asp-for="FiscalYear" class="control-label"></label>
                 <input asp-for="FiscalYear" class="form-control" maxlength='4' min='2020'/>
                 <span asp-validation-for="FiscalYear" class="text-danger"></span>
             </div>
+            <br />
+            <div  class="row">
+                <div class="col-4 form-group">
+                    <input type="search" class="form-control" maxlength='11' placeholder='999-888-777' id='user_ssn' />
+                    <label for="user_ssn" >Search by Social Security Number</label>
 
+            </div>
+            <div  class="col-4 form-group">
+                    <button id='userSearch' class="btn btn-primary btn-sm">Load</button>
+            </div>
+            </div>
+            <br />
             <div class='row'>    
-        <div class="step-app" id="tax_wizard_block">
-          <ul class="step-steps" id='step_steps_block'>        
+                <div class="step-app" id="tax_wizard_block">
+                  <ul class="step-steps" id='step_steps_block'>        
         
-          </ul>
-          <div class="step-content" id='step_content_block'>
+                  </ul>
+                  <div class="step-content" id='step_content_block'>
         
-          </div>
-          <div class="step-footer">
-            <button data-step-action="prev" class="step-btn">Previous</button>
-            <button data-step-action="next" class="step-btn">Next</button>
-            <button data-step-action="finish" class="step-btn">Finish</button>
-          </div>
-        </div>
-</div>
+                  </div>
+                  <div class="step-footer">
+                    <button data-step-action="prev" class="step-btn">Previous</button>
+                    <button data-step-action="next" class="step-btn">Next</button>
+                    <button data-step-action="finish" class="step-btn">Finish</button>
+                  </div>
+                </div>
+            </div>
            
         </form>
 </div>

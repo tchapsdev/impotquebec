@@ -132,7 +132,39 @@
             //getTaxFormDeclarationData();
         });
 
+        $('#userSearch').on('click', function (e) {
+            e.preventDefault();
+            let user_ssn = $(`#user_ssn`).val();
+            console.log(user_ssn);
+            httpservice.get(`Users/getBySsn/${user_ssn}`, {},
+                function (user) {
+                    console.log(user);
+                    fillUserData(user);
+                },
+                function (err) {
+                    console.log(err);
+                    fillUserData({});
+                }
+            )
+        });
     })
+
+    function fillUserData(user) {
+        $('#id_119').val(user.lastName);
+        $('#id_120').val(user.firstName);
+        $('#id_121').val(user.sex);
+        $('#id_130').val(user.ssn);
+        $('#id_123').val(user.addressApartment);
+        $('#id_127').val(user.addressMunicipality);
+        $('#id_129').val(user.addressPostalCode);
+        $('#id_128').val(user.addressProvince);
+        $('#id_125').val(user.addressStreetName);
+        $('#id_124').val(user.addressStreetNumber);
+        $('#id_126').val(user.birthdate);
+        //$('#').val(user.email);
+        $('#id_122').val(user.language);
+        //$('#').val(user.phoneNumber);
+    }
 
     function saveDeclarationForm() {
         let Declaration = getTaxFormDeclarationData();
