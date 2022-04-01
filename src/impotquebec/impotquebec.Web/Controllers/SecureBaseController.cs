@@ -22,7 +22,8 @@ namespace Tchaps.Impotquebec.Controllers
         {
             if (!string.IsNullOrEmpty(CurrentUser.UserName) || User == null)
                 return CurrentUser;
-            var user =  _context.Users.FirstOrDefault(u => u.NormalizedUserName == User.Identity.Name.ToUpper());
+            var login = User.Identity?.Name;
+            var user =  _context.Users.FirstOrDefault(u => !string.IsNullOrEmpty(login) && u.NormalizedUserName == login.ToUpper());
             if (user != null)
                 CurrentUser = user;
             return CurrentUser;
