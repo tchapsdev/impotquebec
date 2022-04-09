@@ -127,7 +127,7 @@
             console.log(action);
             
             console.log(idx);
-            steps_api.prev();            
+            steps_api.prev();
 
             //getTaxFormDeclarationData();
         });
