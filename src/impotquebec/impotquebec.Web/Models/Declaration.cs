@@ -67,7 +67,7 @@ namespace Tchaps.Impotquebec.Models
 
         public DeclarationDetail GetTaxLine( float lineNumber)
         {
-            return Details.FirstOrDefault(d => d.LineNumber == lineNumber);
+            return Details.FirstOrDefault(d => d.LineNumber == lineNumber)?? new DeclarationDetail();
         }
 
         public void SetTaxLine(float lineNumber, decimal value)

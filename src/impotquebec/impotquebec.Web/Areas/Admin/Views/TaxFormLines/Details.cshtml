@@ -2,6 +2,10 @@
 
 @{
     ViewData["Title"] = "Details";
+    var sectionName = Model.TaxFormSection?.Name;
+    sectionName = sectionName != null ? sectionName : "";
+    var taxFormName = Model.TaxForm?.Name;
+    taxFormName = taxFormName != null ? taxFormName : "";
 }
 
 <h1>Details</h1>
@@ -14,7 +18,8 @@
             @Html.DisplayNameFor(model => model.TaxForm)
         </dt>
         <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.TaxForm.TaxFormId)
+            @taxFormName
+            @*@Html.DisplayFor(model => model.TaxForm.TaxFormId)*@
         </dd>
         <dt class = "col-sm-2">
             @Html.DisplayNameFor(model => model.LineNumber)
@@ -32,7 +37,7 @@
             @Html.DisplayNameFor(model => model.TaxFormSection)
         </dt>
         <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.TaxFormSection.TaxFormSectionId)
+            @sectionName           
         </dd>
         <dt class = "col-sm-2">
             @Html.DisplayNameFor(model => model.Name)

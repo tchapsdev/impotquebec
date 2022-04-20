@@ -89,7 +89,7 @@ namespace Tchaps.Impotquebec.Controllers.Api
                 }
             }
 
-            return Ok(declaration.DeclarationId);
+            //return Ok();
         }
 
         //// POST: api/Declarations
