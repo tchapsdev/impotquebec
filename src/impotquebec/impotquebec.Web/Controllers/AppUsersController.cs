@@ -14,10 +14,12 @@ namespace Tchaps.Impotquebec.Controllers
     public class AppUsersController : Controller
     {
         private readonly ApplicationDbContext _context;
+        private readonly ILogger<DeclarationsController> _logger;
 
-        public AppUsersController(ApplicationDbContext context)
+        public AppUsersController(ApplicationDbContext context, ILogger<DeclarationsController> logger)
         {
             _context = context;
+            _logger = logger;
         }
 
         // GET: AppUsers

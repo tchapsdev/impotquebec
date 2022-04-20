@@ -11,10 +11,12 @@ namespace Tchaps.Impotquebec.Controllers.Api
     public class TaxFormsController : ControllerBase
     {
         private readonly ApplicationDbContext _context;
+        private readonly ILogger<TaxFormsController> _logger;
 
-        public TaxFormsController(ApplicationDbContext context)
+        public TaxFormsController(ApplicationDbContext context, ILogger<TaxFormsController> logger)
         {
             _context = context;
+            _logger = logger;
         }
 
         // GET: api/TaxForms

@@ -31,4 +31,10 @@
     <None Include="Data\.backup\aspnet-Tchaps.Impotquebec-3B933E6A-C744-44FB-97CB-8587DA8AD35E.bak" />
   </ItemGroup>
 
+  <ItemGroup>
+    <None Update="logs\stdout\Readme.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
 </Project>

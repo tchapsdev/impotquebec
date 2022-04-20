@@ -15,10 +15,12 @@ namespace Tchaps.Impotquebec.Areas.Admin.Controllers
     public class TaxFormsController : Controller
     {
         private readonly ApplicationDbContext _context;
+        private readonly ILogger<TaxFormsController> _logger;
 
-        public TaxFormsController(ApplicationDbContext context)
+        public TaxFormsController(ApplicationDbContext context, ILogger<TaxFormsController> logger)
         {
             _context = context;
+            _logger = logger;
         }
 
         // GET: Admin/TaxForms
@@ -102,7 +104,7 @@ namespace Tchaps.Impotquebec.Areas.Admin.Controllers
                     _context.Update(taxForm);
                     await _context.SaveChangesAsync();
                 }
-                catch (DbUpdateConcurrencyException)
+                catch (DbUpdateConcurrencyException ex)
                 {
                     if (!TaxFormExists(taxForm.TaxFormId))
                     {
@@ -110,6 +112,7 @@ namespace Tchaps.Impotquebec.Areas.Admin.Controllers
                     }
                     else
                     {
+                        _logger.LogError(ex.Message, ex);
                         throw;
                     }
                 }

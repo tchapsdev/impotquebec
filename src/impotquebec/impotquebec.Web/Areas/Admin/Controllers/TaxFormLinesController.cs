@@ -11,10 +11,12 @@ namespace Tchaps.Impotquebec.Areas.Admin.Controllers
     public class TaxFormLinesController : Controller
     {
         private readonly ApplicationDbContext _context;
+        private readonly ILogger<TaxFormLinesController> _logger;
 
-        public TaxFormLinesController(ApplicationDbContext context)
+        public TaxFormLinesController(ApplicationDbContext context, ILogger<TaxFormLinesController> logger)
         {
             _context = context;
+            _logger = logger;
         }
 
         // GET: Admin/TaxFormLines

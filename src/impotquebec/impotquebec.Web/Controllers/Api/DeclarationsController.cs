@@ -18,10 +18,12 @@ namespace Tchaps.Impotquebec.Controllers.Api
     public class DeclarationsController : ControllerBase
     {
         private readonly ApplicationDbContext _context;
+        private readonly ILogger<DeclarationsController> _logger;
 
-        public DeclarationsController(ApplicationDbContext context)
+        public DeclarationsController(ApplicationDbContext context, ILogger<DeclarationsController> logger)
         {
             _context = context;
+            _logger = logger;
         }
 
         // GET: api/Declarations

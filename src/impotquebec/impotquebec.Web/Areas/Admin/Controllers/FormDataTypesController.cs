@@ -15,10 +15,12 @@ namespace Tchaps.Impotquebec.Areas.Admin.Controllers
     public class FormDataTypesController : Controller
     {
         private readonly ApplicationDbContext _context;
+        private readonly ILogger<FormDataTypesController> _logger;
 
-        public FormDataTypesController(ApplicationDbContext context)
+        public FormDataTypesController(ApplicationDbContext context, ILogger<FormDataTypesController> logger)
         {
             _context = context;
+            _logger = logger;
         }
 
         // GET: Admin/FormDataTypes
