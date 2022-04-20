@@ -61,7 +61,7 @@
                 },
                 onFinish: function () {
                     saveDeclarationForm();
-                    alert('Wizard Completed');
+                   // alert('Wizard Completed');
                 }
             }, 2000)
         });
@@ -172,6 +172,8 @@
         httpservice.post(`Declarations/${declarationId}`, Declaration ,
             function (result) {
                 console.log(result);
+                debugger;
+                window.location.href = `/Declarations/Details?id=${result}`;
             },
             function (Err) {
 

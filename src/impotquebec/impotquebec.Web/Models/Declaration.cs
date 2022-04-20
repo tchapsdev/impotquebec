@@ -6,21 +6,38 @@ namespace Tchaps.Impotquebec.Models
     public class Declaration
     {
         public int DeclarationId { get; set; }
+        [Display(Name = "Fiscal Year")]
         public short FiscalYear { get; set; }
+
         [DataType(DataType.Currency)]
+        [Display(Name = "Total Income")]
         public decimal TotalIncome { get; set; }
+
+        [Display(Name = "Total Deductions")]
         [DataType(DataType.Currency)]
         public decimal TotalDeductions { get; set; }
+
+        [Display(Name = "Net Income")]
         [DataType(DataType.Currency)]
         public decimal NetIncome { get; set; }
+
+        [Display(Name = "Taxable Income")]
         [DataType(DataType.Currency)]
         public decimal TaxableIncome { get; set; }
+
+        [Display(Name = "Non Refundable Tax Credits")]
         [DataType(DataType.Currency)]
         public decimal NonRefundableTaxCredits { get; set; }
+
+        [Display(Name = "Income Tax And Contributions")]
         [DataType(DataType.Currency)]
         public decimal IncomeTaxAndContributions { get; set; }
+
+       
         [DataType(DataType.Currency)]
         public decimal Refund { get; set; }
+
+        [Display(Name = "Balance Due")]
         [DataType(DataType.Currency)]
         public decimal BalanceDue { get; set; }
 

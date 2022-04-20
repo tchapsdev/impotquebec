@@ -2,91 +2,75 @@
 
 @{
     ViewData["Title"] = "Details";
+    Declaration declaration = new Declaration();
+    declaration = Model;
+    var user = new AppUser
+            {
+                LastName = declaration.GetTaxLine(1)?.Value,
+                FirstName = declaration.GetTaxLine(2)?.Value,
+                Language = declaration.GetTaxLine(5)?.Value,
+                AddressApartment = declaration.GetTaxLine(7)?.Value,
+                AddressStreetNumber = declaration.GetTaxLine(7)?.Value,
+                AddressStreetName = declaration.GetTaxLine(8)?.Value,
+                AddressProvince = declaration.GetTaxLine(8)?.Value,
+                AddressPostalCode = declaration.GetTaxLine(9)?.Value,
+                Ssn = declaration.GetTaxLine(11)?.Value
+            };
 }
 
-<h1>Details</h1>
 
 <div>
-    <h4>Declaration</h4>
+    <h4>Declaration @user.FirstName @user.LastName</h4>
     <hr />
-    <dl class="row">
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.FiscalYear)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.FiscalYear)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.TotalIncome)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.TotalIncome)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.TotalDeductions)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.TotalDeductions)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.NetIncome)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.NetIncome)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.TaxableIncome)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.TaxableIncome)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.NonRefundableTaxCredits)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.NonRefundableTaxCredits)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.IncomeTaxAndContributions)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.IncomeTaxAndContributions)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Refund)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Refund)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.BalanceDue)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.BalanceDue)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.TaxForm)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.TaxForm.TaxFormId)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.User)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.User.UserName)
-        </dd>
-       
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Created)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Created)
-        </dd>
-       
-    </dl>
+   
+    <div class="container">
+        <div class="row">
+            <div class="col-4"> <strong>LastName</strong></div>
+            <div class="col-4">@user.LastName</div>
+        </div><br />
+       <div class="row">
+            <div class="col-4"><strong>FirstName</strong> </div>
+            <div class="col-4">@user.FirstName</div>
+        </div><br />
+        <div class="row">
+            <div class="col-4"><strong>Town, Municipality</strong> </div>
+            <div class="col-4">@user.AddressProvince</div>
+        </div><br />
+        <div class="row">
+            <div class="col-4"><strong>PostalCode</strong> </div>
+            <div class="col-4">@user.AddressPostalCode</div>
+        </div><br />
+        <div class="row">
+            <div class="col-4"><strong>Ssn</strong> </div>
+            <div class="col-4">@user.Ssn</div>
+        </div><br />       
+    </div><br />
+
+    <h2>Details</h2>
+
+<table class="table table-sm table-striped table-responsive">   
+    
+    <tbody>
+        <tr><th> @Html.DisplayNameFor(model => model.FiscalYear)</th>  <td> @Html.DisplayFor(model => model.FiscalYear) </td></tr>
+        <tr><th>  @Html.DisplayNameFor(model => model.TotalIncome)</th>  <td>  @Html.DisplayFor(model => model.TotalIncome)</td></tr>
+        <tr><th> @Html.DisplayNameFor(model => model.TotalDeductions) </th>  <td> @Html.DisplayFor(model => model.TotalDeductions)</td></tr>
+        <tr><th>  @Html.DisplayNameFor(model => model.NetIncome)</th>  <td>  @Html.DisplayFor(model => model.NetIncome)</td></tr>
+        <tr><th>  @Html.DisplayNameFor(model => model.TaxableIncome)</th>  <td>  @Html.DisplayFor(model => model.TaxableIncome)</td></tr>
+        <tr><th> @Html.DisplayNameFor(model => model.NonRefundableTaxCredits)</th>  <td> @Html.DisplayFor(model => model.NonRefundableTaxCredits) </td></tr>
+        <tr><th>  @Html.DisplayNameFor(model => model.IncomeTaxAndContributions)</th>  <td>  @Html.DisplayFor(model => model.IncomeTaxAndContributions)</td></tr>
+        <tr><th> @Html.DisplayNameFor(model => model.Refund)</th>  <td> @Html.DisplayFor(model => model.Refund)</td></tr>
+        <tr><th>@Html.DisplayNameFor(model => model.BalanceDue) </th>  <td>@Html.DisplayFor(model => model.BalanceDue) </td></tr>
+        <tr><th>  @Html.DisplayNameFor(model => model.Created)</th>  <td>@Html.DisplayFor(model => model.Created) </td></tr>       
+    </tbody>
+</table>
+
+
+
 </div>
 <div>
     @*<a asp-action="Edit" asp-route-id="@Model?.DeclarationId">Edit</a> |*@
     <a asp-action="Index">Back to List</a>
 </div>
+
+
+

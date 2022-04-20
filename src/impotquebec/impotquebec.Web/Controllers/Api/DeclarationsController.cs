@@ -37,6 +37,8 @@ namespace Tchaps.Impotquebec.Controllers.Api
         {
             var declaration = await _context.Declarations.FindAsync(id);
 
+            TaxProcessor.ProcessTp1Lines(declaration);
+
             if (declaration == null)
             {
                 return NotFound();
@@ -59,6 +61,7 @@ namespace Tchaps.Impotquebec.Controllers.Api
 
             try
             {
+
                 if (declaration.DeclarationId == 0)
                 {
                     declaration.Created = DateTime.UtcNow;
@@ -86,7 +89,7 @@ namespace Tchaps.Impotquebec.Controllers.Api
                 }
             }
 
-            return NoContent();
+            return Ok(declaration.DeclarationId);
         }
 
         //// POST: api/Declarations

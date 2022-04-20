@@ -9,6 +9,7 @@ using Microsoft.EntityFrameworkCore;
 using Tchaps.Impotquebec.Data;
 using Tchaps.Impotquebec.Models;
 using Microsoft.AspNetCore.Authorization;
+using Tchaps.Impotquebec.Helpers;
 
 namespace Tchaps.Impotquebec.Controllers
 {
@@ -21,8 +22,10 @@ namespace Tchaps.Impotquebec.Controllers
         // GET: Declarations
         public async Task<IActionResult> Index()
         {
-            var applicationDbContext = _context.Declarations.Include(d => d.TaxForm).Include(d => d.User);
-            return View(await applicationDbContext.ToListAsync());
+            var applicationDbContext = _context.Declarations
+                                                .Include(d => d.TaxForm)
+                                                .Include(d => d.User);
+            return View(await applicationDbContext.OrderByDescending(d => d.DeclarationId).ToListAsync());
         }
 
         // GET: Declarations/Details/5
@@ -36,7 +39,11 @@ namespace Tchaps.Impotquebec.Controllers
             var declaration = await _context.Declarations
                 .Include(d => d.TaxForm)
                 .Include(d => d.User)
+                .Include(d => d.Details)
                 .FirstOrDefaultAsync(m => m.DeclarationId == id);
+            
+           // TaxProcessor.ProcessTp1Lines(declaration);
+
             if (declaration == null)
             {
                 return NotFound();
