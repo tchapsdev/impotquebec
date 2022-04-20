@@ -15,10 +15,10 @@ namespace Tchaps.Impotquebec.Models
         public virtual TaxForm? TaxForm { get; set; }
 
         [Display(Name = "Internal Name")]
-        public string InternalName { get; set; }
+        public string InternalName { get; set; } = "";
 
         [Display(Name = "Line Number")]
-        public string LineNumbers { get; set; }// [12,,563, ]
+        public string LineNumbers { get; set; } = ""; // [12,,563, ]
 
         public int Rank { get; set; }
         public virtual IList<TaxFormLine> TaxFormLines { get; set; }

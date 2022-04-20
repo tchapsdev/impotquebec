@@ -10,7 +10,7 @@ namespace Tchaps.Impotquebec.Models
         public virtual TaxForm? TaxForm { get; set; }
 
         [Display(Name = "Line Number")]
-        public string LineNumber { get; set; }
+        public string LineNumber { get; set; } = "";
         public short Rank { get; set; }
         [Display(Name = "Active")]
         public bool IsActive { get; set; } = true;

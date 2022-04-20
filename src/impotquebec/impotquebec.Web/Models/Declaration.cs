@@ -5,6 +5,10 @@ namespace Tchaps.Impotquebec.Models
 {
     public class Declaration
     {
+        public Declaration()
+        {
+            Details = new List<DeclarationDetail>();
+        }
         public int DeclarationId { get; set; }
         [Display(Name = "Fiscal Year")]
         public short FiscalYear { get; set; }
@@ -51,7 +55,7 @@ namespace Tchaps.Impotquebec.Models
         public AppUser? User { get; set; }
 
 
-        public string History { get; set; }
+        public string History { get; set; } = "";
 
         public DateTime? Created { get; set; }
         public DateTime? Modified { get; set; }

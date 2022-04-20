@@ -6,7 +6,7 @@
         public int DeclarationId { get; set; }
         public int TaxFormLineId { get; set; }
         public float LineNumber { get; set; }
-        public string Value { get; set; }
+        public string Value { get; set; } = "";
         public DateTime? Modified { get; set; }
 
         public override string ToString()

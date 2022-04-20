@@ -3,7 +3,7 @@
     public class FormDataType
     {
         public int FormDataTypeId { get; set; }
-        public string Name { get; set; }
+        public string Name { get; set; } = "";
 
         public bool IsTextBox => Name == "Text" || Name == "Number" || Name == "Date" || Name == "Checkbox";
         public bool IsCheckBox => Name == "Checkbox";
